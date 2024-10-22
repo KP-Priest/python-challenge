@@ -6,17 +6,20 @@ import csv
 import os
 
 # Files to load and output (update with correct file paths)
-file_to_load = os.path.join("Resources", "election_data.csv")  # Input file path
-file_to_output = os.path.join("analysis", "election_analysis.txt")  # Output file path
+file_to_load = os.path.join("users/KP/Git/python-Challenge/PyPoll/Resources", "election_data.csv")  # Input file path
+file_to_output = os.path.join("users/KP/Git/python-challenge/PyPoll/analysis", "election_analysis.txt")  # Output file path
 
 # Initialize variables to track the election data
 total_votes = 0  # Track the total number of votes cast
+vote_getters = [] # list of candidates who received votes
 
 # Define lists and dictionaries to track candidate names and vote counts
-
+candidate_vote_count = {} # 'candidate': vote count
 
 # Winning Candidate and Winning Count Tracker
-
+election_winner = ""
+winning_vote_count = 0
+windding_percentage = 0
 
 # Open the CSV file and process it
 with open(file_to_load) as election_data:
@@ -27,6 +30,10 @@ with open(file_to_load) as election_data:
 
     # Loop through each row of the dataset and process it
     for row in reader:
+
+
+
+        
 
         # Print a loading indicator (for large datasets)
         print(". ", end="")
