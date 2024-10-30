@@ -33,7 +33,7 @@ with open(file_to_load) as election_data:
     for row in reader:
 
         # Print a loading indicator (for large datasets)
-        print(". ", end="")
+        print("^ ", end="")
 
         #print(vote_getters) # test code up to this point
 
