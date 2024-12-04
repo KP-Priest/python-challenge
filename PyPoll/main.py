@@ -6,16 +6,16 @@ import csv
 import os
 
 # Files to load and output (update with correct file paths)
-file_to_load = os.path.join("/users/kp/Git/python-challenge/PyPoll/Resources", "election_data.csv")  # Input file path
-file_to_output = os.path.join("/users/kp/Git/python-challenge/PyPoll/analysis", "election_analysis.txt")  # Output file path
+file_to_load = os.path.join(r"/users/kp/Git/python-challenge/PyPoll/Resources", "election_data.csv")  # Input file path
+file_to_output = os.path.join(r"/users/kp/Git/python-challenge/PyPoll/analysis", "election_analysis.txt")  # Output file path
 
 # Initialize variables to track the election data
 total_votes = 0  # Track the total number of votes cast
-candidate = ""   # holds candidate name
-vote_getters = [] # list of candidates who received votes
+candidate_name = ""  # holds candidate name
 
 # Define lists and dictionaries to track candidate names and vote counts
-candidate_vote_count = {} # 'candidate': vote count
+candidate_options = [] # list of candidates who received votes
+candidate_vote_count = {} # 'candidate_name': vote count
 
 # Winning Candidate and Winning Count Tracker
 election_winner = ""
@@ -23,7 +23,7 @@ winning_vote_count = 0
 winning_percentage = 0
 
 # Open the CSV file and process it
-with open(file_to_load) as election_data:
+with open(file_to_load, 'r') as election_data:
     reader = csv.reader(election_data)
 
     # Skip the header row
@@ -35,23 +35,23 @@ with open(file_to_load) as election_data:
         # Print a loading indicator (for large datasets)
         print("^ ", end="")
 
-        #print(vote_getters) # test code up to this point
-
-
         # Increment the total vote count for each row
-        total_votes =+ 1
+        total_votes += 1
 
-        # Get the candidate's name from the row
-        # If the candidate is not already in the candidate list, add them
-        candidate = row[2]
-        if candidate not in vote_getters:
-            vote_getters.append(candidate)
-            candidate_vote_count[candidate] = 0
+        # Get the candidate_name from the row
+        candidate_name = row[2] 
 
-            # Add a vote to the candidate's count
-            candidate_vote_count[candidate] += 1
-            # print candidate_vote_count to test code
-            print(candidate_vote_count)
+    # If the candidate is not already in the candidate list, add them
+    if candidate_name not in candidate_options:
+        candidate_options.append(candidate_name)
+        candidate_vote_count[candidate_name] = 0
+
+    # Add a vote to the candidate's count
+    candidate_vote_count[candidate_name] += 1
+    
+    # print candidate_vote_count to test code
+    
+    #print(candidate_vote_count)
 
 
     # Open a text file to save the output
