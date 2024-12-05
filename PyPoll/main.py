@@ -10,12 +10,11 @@ file_to_load = os.path.join(r"/users/kp/Git/python-challenge/PyPoll/Resources", 
 file_to_output = os.path.join(r"/users/kp/Git/python-challenge/PyPoll/analysis", "election_analysis.txt")  # Output file path
 
 # Initialize variables to track the election data
-total_votes = 0  # Track the total number of votes cast
-candidate_name = ""  # holds candidate name
-
 # Define lists and dictionaries to track candidate names and vote counts
-candidate_options = [] # list of candidates who received votes
-candidate_vote_count = {} # 'candidate_name': vote count
+candidate = ""  # holds candidate name
+candidate_list = [] # list of candidates who received votes
+votes = {} # 'candidate': candidate's vote count
+total_votes = 0  # Track the total number of votes cast
 
 # Winning Candidate and Winning Count Tracker
 election_winner = ""
@@ -39,44 +38,42 @@ with open(file_to_load, 'r') as election_data:
         total_votes += 1
 
         # Get the candidate_name from the row
-        candidate_name = row[2] 
+        candidate = row[2] 
 
     # If the candidate is not already in the candidate list, add them
-    if candidate_name not in candidate_options:
-        candidate_options.append(candidate_name)
-        candidate_vote_count[candidate_name] = 0
+    if candidate not in candidate_list:
+        candidate_list.append(candidate)
+        votes[candidate] = 0
 
     # Add a vote to the candidate's count
-    candidate_vote_count[candidate_name] += 1
+    votes[candidate] += 1
     
     # print candidate_vote_count to test code
-    
     #print(candidate_vote_count)
 
-
-    # Open a text file to save the output
-    
-    # with open(file_to_output, "w") as txt_file:
+# Open a text file to save the output
+with open(file_to_output, "w") as txt_file:
 
     # Print the total vote count (to terminal)
-
+    print(total_votes)
 
     # Write the total vote count to the text file
-
+    txt_file.write(f"Total Votes: (total_votes)\n")
 
     # Loop through the candidates to determine vote percentages and identify the winner
-
-
+    for candidate in votes:
         # Get the vote count and calculate the percentage
-
-
+        vote_count = votes[candidate]
+        vote_percentage = f"{(vote_count / total_votes) * 100:.3f}%"
         # Update the winning candidate if this one has more votes
-
-
+        if vote_count > winning_vote_count:
+            winning_vote_count = vote_count
+            election_winner = candidate
+            
         # Print and save each candidate's vote count and percentage
 
 
-        # Generate and print the winning candidate summary
+    #Generate and print the winning candidate summary
 
 
-        # Save the winning candidate summary to the text file
+    # Save the winning candidate summary to the text file
